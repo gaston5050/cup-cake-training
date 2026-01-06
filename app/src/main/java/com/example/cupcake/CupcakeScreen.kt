@@ -48,6 +48,7 @@ import com.example.cupcake.ui.StartOrderScreen
 import android.content.Context
 import android.content.Intent
 import androidx.annotation.StringRes
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.navigation.compose.currentBackStackEntryAsState
 
 enum class CupcakeScreen(@StringRes val title: Int) {
@@ -69,6 +70,7 @@ fun CupcakeAppBar(
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
+
         title = { Text(stringResource(currentScreen.title)) },
         modifier = modifier,
         navigationIcon = {

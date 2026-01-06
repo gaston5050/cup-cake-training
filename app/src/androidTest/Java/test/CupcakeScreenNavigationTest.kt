@@ -1,7 +1,20 @@
 package com.example.cupcake.ui
 
-@get: Rule
-val composeTestRule = creatAndroidComposableRule<ComponentActivity>()
+import androidx.activity.ComponentActivity
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.navigation.compose.ComposeNavigator
+import androidx.navigation.testing.TestNavHostController
+import com.example.cupcake.CupcakeApp
+import com.example.cupcake.CupcakeScreen
+import junit.framework.TestCase.assertEquals
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import test.assertCurrentRouteName
+
+@get:Rule
+val composeTestRule = createAndroidComposeRule<ComponentActivity>()
 private lateinit var navController: TestNavHostController
 
 @Before
@@ -10,10 +23,16 @@ fun setupCupcakeNavHost(){
         navController = TestNavHostController(LocalContext.current).apply{
             navigatorProvider.addNavigator(ComposeNavigator())
         }
-        CupCakeApp(navController = navController)}
+        CupcakeApp(navController = navController)}
 
 
 }
+
+@Test
+fun cupcakeNavHost_verifyStartDestination() {
+    navController.assertCurrentRouteName(CupcakeScreen.Start.name)
+}
+
 
 class CupcakeScreenNavigationTest {
 
